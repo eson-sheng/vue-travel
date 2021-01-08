@@ -1,52 +1,113 @@
 <template>
   <div class="icons">
-    <div class="icon" v-for="item in 8">
-      <div class="icons-img">
-        <img class="icon-img-content" src="http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png" alt="热门景点">
-      </div>
-      <p class="icon-desc">热门景点</p>
-    </div>
+    <swiper ref="mySwiper">
+      <swiper-slide v-for="(page, index) of pages" :key="index">
+        <div class="icon" v-for="item in page" :key="item.id">
+          <div class="icons-img">
+            <img class="icon-img-content" :src="item.imgUrl" :alt="item.desc">
+          </div>
+          <p class="icon-desc">{{ item.desc }}</p>
+        </div>
+      </swiper-slide>
+    </swiper>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HomeIcons'
+  name: 'HomeIcons',
+  data () {
+    return {
+      iconList: [{
+        id: 1,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }, {
+        id: 2,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }, {
+        id: 3,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }, {
+        id: 4,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }, {
+        id: 5,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }, {
+        id: 6,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }, {
+        id: 7,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }, {
+        id: 8,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }, {
+        id: 9,
+        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
+        desc: '热门景点'
+      }]
+    }
+  },
+  computed: {
+    pages () {
+      const pages = []
+      this.iconList.forEach((item, index) => {
+        const page = Math.floor(index / 8)
+        if (!pages[page]) {
+          pages[page] = []
+        }
+        pages[page].push(item)
+      })
+      return pages
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
   @import "~styles/varibles.styl"
-  .icons
+  @import "~styles/mixins.styl"
+  .icons >>> .swiper-container
     overflow hidden
     height 0
     padding-bottom 50%
-    .icon
-      position relative
-      overflow hidden
-      float left
-      height 0
-      width 25%
-      padding-bottom 25%
-      .icons-img
-        position absolute
-        top 0
-        left 0
-        right 0
-        bottom .44rem
-        box-sizing border-box
-        padding .1rem
-        .icon-img-content
-          display block
-          margin 0 auto
-          height 100%
-      .icon-desc
-        position absolute
-        left 0
-        right 0
-        bottom 0
-        height .44rem
-        line-height .44rem
-        text-align center
-        color $darkTextColor
+  .icon
+    position relative
+    overflow hidden
+    float left
+    height 0
+    width 25%
+    padding-bottom 25%
+    .icons-img
+      position absolute
+      top 0
+      left 0
+      right 0
+      bottom .44rem
+      box-sizing border-box
+      padding .1rem
+      .icon-img-content
+        display block
+        margin 0 auto
+        height 100%
+    .icon-desc
+      padding 0 .1rem
+      position absolute
+      left 0
+      right 0
+      bottom 0
+      height .44rem
+      line-height .44rem
+      text-align center
+      color $darkTextColor
+      ellipse()
 </style>
