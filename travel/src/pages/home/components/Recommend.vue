@@ -2,7 +2,7 @@
   <div>
     <div class="recommend-title">热销推荐</div>
     <ul>
-      <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item of list" :key="item.id">
         <img class="item-img" :src="item.imgUrl" :alt="item.title">
         <div class="item-info">
           <p class="item-title">{{ item.title }}</p>
@@ -17,24 +17,12 @@
 <script>
 export default {
   name: 'HomeRecommend',
-  data () {
-    return {
-      recommendList: [{
-        id: '1',
-        imgUrl: 'https://imgs.qunarzz.com/sight/p0/1706/63/63d29ac8a2abdd39a3.water.jpg_200x200_29000f23.jpg',
-        title: '大连绅士环氧世界',
-        desc: '流浪地球盛世美景在良辰吉日的美景,流浪地球盛世美景在良辰吉日的美景'
-      }, {
-        id: '2',
-        imgUrl: 'https://imgs.qunarzz.com/sight/p0/1706/63/63d29ac8a2abdd39a3.water.jpg_200x200_29000f23.jpg',
-        title: '大连绅士环氧世界',
-        desc: '流浪地球盛世美景在良辰吉日的美景,流浪地球盛世美景在良辰吉日的美景'
-      }, {
-        id: '3',
-        imgUrl: 'https://imgs.qunarzz.com/sight/p0/1706/63/63d29ac8a2abdd39a3.water.jpg_200x200_29000f23.jpg',
-        title: '大连绅士环氧世界',
-        desc: '流浪地球盛世美景在良辰吉日的美景,流浪地球盛世美景在良辰吉日的美景'
-      }]
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <swiper :options="swiperOption" ref="mySwiper">
+    <swiper :options="swiperOption" ref="mySwiper" v-if="showSwiper">
       <swiper-slide v-for="(page, index) of pages" :key="index">
         <div class="icon" v-for="item in page" :key="item.id">
           <div class="icons-img">
@@ -16,54 +16,28 @@
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   data () {
     return {
       swiperOption: {
         loop: true
-      },
-      iconList: [{
-        id: 1,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }, {
-        id: 2,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }, {
-        id: 3,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }, {
-        id: 4,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }, {
-        id: 5,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }, {
-        id: 6,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }, {
-        id: 7,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }, {
-        id: 8,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }, {
-        id: 9,
-        imgUrl: 'http://img1.qunarzz.com/piao/fusion/1611/54/ace00878a52d9702.png',
-        desc: '热门景点'
-      }]
+      }
     }
   },
   computed: {
+    showSwiper () {
+      return this.list.length
+    },
     pages () {
       const pages = []
-      this.iconList.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []
